@@ -41,6 +41,11 @@
 		var personEats = 25 // 25 square inches per person, based on advanced calculations
 		var pizzaWillFeed = (pizzaArea / personEats).toFixed(1);
 		var pizzaWillCost = (pizzaCost / pizzaWillFeed).toFixed(2);
+
+		// calculate pizza per fatty
+		var fattyEats = 50 // 25 square inches per person, based on advanced calculations
+		var pizzaWillFeedFat = (pizzaArea / fattyEats).toFixed(1);
+		var pizzaWillCostFat = (pizzaCost / pizzaWillFeedFat).toFixed(2);		
 		
 		// update results
 		document.getElementById("pizzaValue1").innerHTML = pizzaValue;
@@ -49,6 +54,8 @@
 		document.getElementById("pizzaArea1").innerHTML = pizzaArea;
 		document.getElementById("pizzaWillFeed1").innerHTML = pizzaWillFeed;
 		document.getElementById("pizzaWillCost1").innerHTML = pizzaWillCost;
+		document.getElementById("pizzaWillFeedF").innerHTML = pizzaWillFeedFat;
+		document.getElementById("pizzaWillCostF").innerHTML = pizzaWillCostFat;		
 		
 		// unhide the results div 
 		document.getElementById("results").style.display = 'block';
@@ -151,6 +158,8 @@
 						<strong>$<span id="pizzaValue1">pizzaValue1</span></strong> / sq inch for a <span id="pizzaSize1">pizzaSize1</span>" pizza @ $<span id="pizzaCost1">pizzaCost1</span>
 						<br>
 						That is <span id="pizzaArea1">pizzaArea1</span> sq inches of pizza and should feed <span id="pizzaWillFeed1">pizzaWillFeed1</span> average people for a cost of $<span id="pizzaWillCost1">pizzaWillCost</span> each. 
+						<br>
+						Or...if your typical serving for pizza is eating an entire 8" pie - it will feed <span id="pizzaWillFeedF">pizzaWillFeedF</span> people for a cost of $<span id="pizzaWillCostF">pizzaWillCostF</span> each. 						
 					</div> <!-- results-detail -->
 					
 				<hr>
