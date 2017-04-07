@@ -4,21 +4,21 @@
 	<title>pizza-cost-per-square-inch-calculator</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<link rel="shortcut icon" href="/docs-assets/ico/favicon.png">
+	<link rel="shortcut icon" href="favicon.ico">
 
-	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 	<script src="js/bootstrap.min.js"></script>
 
-        <!-- Bootstrap core CSS -->
-	<link href="css/bootstrap.css" rel="stylesheet">
-    <!-- Bootstrap theme -->
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    
+    <!-- Custom styles for this template -->
+    <link href="css/narrow-jumbotron.css" rel="stylesheet">
+
     
 <script type="text/javascript">
 	function calcPizza() {
@@ -52,6 +52,7 @@
 		
 		// unhide the results div 
 		document.getElementById("results").style.display = 'block';
+		document.getElementById("msg-enter-price").style.display = 'none';
 		$('#stickyButton').show();
 		
 		} // end calcPizza function
@@ -59,19 +60,13 @@
 
 </script>
 
-<style>#sizeSlider { margin: 10px; }	</style>
-
-    
-    </head>
-    
-    <body>
-
+	<style>#sizeSlider { margin: 10px; }	</style>
 
 	  <script>
 	  $(function() {
 	    var select = $( "#pizzaSizeDD" );
 	    var slider = $( "<div id='sizeSlider'></div>" ).insertAfter( select ).slider({
-	      min: 1,
+	      min: 1, 
 	      max: 13,
 	      range: "min",
 	      value: select[ 0 ].selectedIndex + 1,
@@ -86,102 +81,154 @@
 	  });
 	  </script>
 
-	<h3>pizza-cost-per-square-inch-calculator</h3>
-	<br>
-	Pizza cost: 
-		<input type="number" pattern="\d+(\.\d*)?" id="pizzaCostDD" size=6 maxlength=5 placeholder="Pizza Cost" onkeyup=calcPizza()>
-	<br>
+<!-- Google analytics start - we want to know where folks are coming from -->  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-	Pizza size: 
-		<select autofocus  id="pizzaSizeDD" onchange=calcPizza() >
-			<option value="8">8"</option>
-			<option value="9">9"</option>
-			<option value="10">10"</option>
-			<option value="11">11"</option>
-			<option value="12">12"</option>
-			<option value="13">13"</option>
-			<option value="14">14"</option>
-			<option value="15">15"</option>
-			<option value="16">16"</option>
-			<option value="17">17"</option>
-			<option value="18">18"</option>
-			<option value="19">19"</option>
-			<option value="20">20"</option>
-		</select>
-	<button type="button" id="stickyButton" class="btn btn-sm btn-default" onclick=(calcPizza(),duplicate()) style="display: none">Make sticky for comparison</button>
-	<br>
-	<hr>
-	<div id="results" style="display: none;">
-		<h3>Results</h3>
-			<div id="results-detail" class="alert alert-success">
-				<strong>$<span id="pizzaValue1">pizzaValue1</span></strong> / sq inch for a <span id="pizzaSize1">pizzaSize1</span>" pizza @ $<span id="pizzaCost1">pizzaCost1</span>
-				<br>
-				That is <span id="pizzaArea1">pizzaArea1</span> sq inches of pizza and should feed <span id="pizzaWillFeed1">pizzaWillFeed1</span> average people for a cost of $<span id="pizzaWillCost1">pizzaWillCost</span> each. 
-			
-			
-			</div> <!-- results-detail -->
-			
-		<hr>
-	</div> <!-- // results -->
-	<div id="generate-here">
-	</div> <!-- generate-here --> 
+  ga('create', 'UA-97024037-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- Google analytics end --> 
+    
+    </head>
+    
+    <body>
 
-	<script>
-	// down here to be under the element it needs to talk to, to ensure it can find it
-	var i = 0;
-	var original = document.getElementById("results-detail");
+    <div class="container">
+      	<div class="header clearfix">
+        	<h3 class="text-muted">pizza-cost-per-square-inch-calculator</h3>
+      	</div>
+<!--       		<button type="button" id="impButton" class="btn btn-sm btn-default" onclick=(calcPizza(),duplicate()) style="">Imperial</button>
+      		<button type="button" id="metButton" class="btn btn-sm btn-default" onclick=(calcPizza(),duplicate()) style="">Metric</button> -->
+      		<br>
 
-	function duplicate() {
-	    var clone = original.cloneNode(true); // "deep" clone
-	    clone.id = "results-detail" + ++i;
-	    $('#generate-here').prepend(clone);
-	    $('#' + clone.id).removeClass( "alert alert-success" );
-	    $('#' + clone.id).addClass( "alert alert-info" );
-	    var toAppend = '<a class="deleter ui-link" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="color: red"></span></a>';
-	   $('#' + clone.id).append(toAppend);
-	   $('.deleter').on('click', function(){
-	  		$(this).closest("div").remove();
+			Pizza cost: 
+				<input type="number" pattern="\d+(\.\d*)?" id="pizzaCostDD" size=6 maxlength=5 placeholder="Pizza Cost" onkeyup=calcPizza()>
+			<br>	
+
+			Pizza size: 
+				<select autofocus  id="pizzaSizeDD" onchange=calcPizza() >
+					<option value="8">8"</option>
+					<option value="9">9"</option>
+					<option value="10">10"</option>
+					<option value="11">11"</option>
+					<option value="12">12"</option>
+					<option value="13">13"</option>
+					<option value="14">14"</option>
+					<option value="15">15"</option>
+					<option value="16">16"</option>
+					<option value="17">17"</option>
+					<option value="18">18"</option>
+					<option value="19">19"</option>
+					<option value="20">20"</option>
+					<option value="21">21"</option>
+					<option value="22">22"</option>
+					<option value="23">23"</option>
+					<option value="24">24"</option>
+					<option value="25">25"</option>
+					<option value="26">26"</option>
+					<option value="27">27"</option>
+					<option value="28">28"</option>
+					<option value="29">29"</option>
+					<option value="30">30"</option>
+					<option value="42">Reddit-size 42"</option>
+					<option value="2000">Frank's 2000" pizza</option>
+				</select>
+
+			<div id="msg-enter-price" class="alert alert-success">
+						<strong>Enter a pizza cost and we'll calcuate it</strong>
+			</div> <!-- end, msg-enter-price -->
+
+			<button type="button" id="stickyButton" class="btn btn-sm btn-default" onclick=(calcPizza(),duplicate()) style="display: none">Make sticky for comparison</button>
+			<br>
+			<hr>
+			<div id="results" style="display: none;">
+				<h3>Results</h3>
+					<div id="results-detail" class="alert alert-success">
+						<strong>$<span id="pizzaValue1">pizzaValue1</span></strong> / sq inch for a <span id="pizzaSize1">pizzaSize1</span>" pizza @ $<span id="pizzaCost1">pizzaCost1</span>
+						<br>
+						That is <span id="pizzaArea1">pizzaArea1</span> sq inches of pizza and should feed <span id="pizzaWillFeed1">pizzaWillFeed1</span> average people for a cost of $<span id="pizzaWillCost1">pizzaWillCost</span> each. 
+					</div> <!-- results-detail -->
+					
+				<hr>
+			</div> <!-- // results -->
+			<div id="generate-here">
+			</div> <!-- generate-here --> 
+
+			<script>
+			// down here to be under the element it needs to talk to, to ensure it can find it
+			var i = 0;
+			var original = document.getElementById("results-detail");
+
+			function duplicate() {
+			    var clone = original.cloneNode(true); // "deep" clone
+			    clone.id = "results-detail" + ++i;
+			    $('#generate-here').prepend(clone);
+			    $('#' + clone.id).removeClass( "alert alert-success" );
+			    $('#' + clone.id).addClass( "alert alert-info" );
+			    var toAppend = '<a class="deleter ui-link" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="color: red"></span></a>';
+			   $('#' + clone.id).append(toAppend);
+			   $('.deleter').on('click', function(){
+			  		$(this).closest("div").remove();
+					})
+			}
+			</script>
+				
+			<script>
+			$('.deleter').on('click', function(){
+			  $(this).closest("div").remove();
 			})
-	}
-	</script>
-		
-	<script>
-	$('.deleter').on('click', function(){
-	  $(this).closest("div").remove();
-	})
-	</script>
-	
-	<br>
-	
-	<div  class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Why?</h3>
-            </div>
-            <div class="panel-body">
-              The math of why bigger pizzas are such a good deal is simple:
-	      <br>
-	      A pizza is a circle, and the area of a circle increases with the square of the radius.
-	<br>
-	A 16-inch pizza is actually <i>four times</i> as big as an 8-inch pizza.
-	<br>
-	<br>
-From:       
-	<a href="http://www.npr.org/blogs/money/2014/02/26/282132576/74-476-reasons-you-should-always-get-the-bigger-pizza" target="_blank">You Should Always Get The Bigger Pizza</a>
-	<br><a href="http://www.npr.org/blogs/money/2014/02/26/282547399/one-reason-to-get-whatever-size-pizza-you-want" target="_blank">...or not...</a>
+			</script>
+			
+			<br>
+			
 
-	</div>
-          </div>
-	
+			<div  class="panel panel-default">
+	            <div class="panel-heading">
+	              <h3 class="panel-title">An 8" pizza won't feed 2 people!</h3>
+	            </div>
+	            <div class="panel-body">
+		            What math is this?!
+				    <br>
+				    It is based on some research (read: 2 minutes of Googling) and serving sizes from some big chains.<br>
+					Which yielded... a serving of pizza is around 400-500 calories, or roughly a 5x5" square of pizza. 
+					<br><br>
+				</div>
+		    </div>
 
 
+			<div  class="panel panel-default">
+	            <div class="panel-heading">
+	              <h3 class="panel-title">Why this calculator?</h3>
+	            </div>
+	            <div class="panel-body">
+		            The math of why bigger pizzas are such a good deal is simple:
+				    <br>
+				    A pizza is a circle, and the area of a circle increases with the square of the radius.
+					<br>
+					A 16-inch pizza is actually <i>four times</i> as big as an 8-inch pizza.
+					<br>
+					<br>
+					From:       
+					<a href="http://www.npr.org/blogs/money/2014/02/26/282132576/74-476-reasons-you-should-always-get-the-bigger-pizza" target="_blank">You Should Always Get The Bigger Pizza</a>
+					<br><a href="http://www.npr.org/blogs/money/2014/02/26/282547399/one-reason-to-get-whatever-size-pizza-you-want" target="_blank">...or not...</a>
+					<br>
+					<br>
+					If you find this useful, and want to remember to use it at your next pizza ordering adventure - you can add it to your home screen on your device<br>
+				</div>
+		    </div>
+			
 
-<hr>
-<br>
-<br>
-<p style="font-family:arial;color:green;font-size:10px;">
-	mike green, 2014, <a href="mailto:nekbet@gmail.com">nekbet@gmail.com</a>
-</p>
+	</div> <!-- end container -->
 
+	<hr>
+
+	<p style="font-family:arial;color:green;font-size:10px;">
+		mike green, 2014, <a href="mailto:nekbet@gmail.com">nekbet@gmail.com</a>
+	</p>
 
 
   </body>
